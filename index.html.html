@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daleva · Manual de Búlgaros y Kéfir</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --marron:    #2C1810;
+    --ambar:     #C8873A;
+    --ambar-lt:  #E0A55A;
+    --verde:     #2D4A35;
+    --menta:     #A8C5B0;
+    --crema:     #F5F0E8;
+    --crema-osc: #EAD9C0;
+    --blanco:    #FDFAF4;
+    --texto:     #3D2B1F;
+    --texto-lt:  #7A5C3E;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--crema);
+    color: var(--texto);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NAVEGACIÓN ─────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--marron);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 62px;
+    border-bottom: 2px solid var(--ambar);
+  }
+
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ambar);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .nav-brand span {
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+    letter-spacing: 2px;
+    display: block;
+    margin-top: -2px;
+    font-family: 'Jost', sans-serif;
+  }
+
+  .nav-links {
+    display: flex; gap: 6px;
+  }
+
+  .nav-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    background: none;
+    border: 1px solid transparent;
+    padding: 7px 16px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--ambar);
+    border-color: var(--ambar);
+    background: rgba(200,135,58,0.08);
+  }
+
+  /* ── SECCIONES / PÁGINAS ────────────────────────────────── */
+  .page {
+    display: none;
+    padding-top: 62px;
+    min-height: 100vh;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PORTADA ────────────────────────────────────────────── */
+  .cover {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 62px);
+  }
+
+  .cover-left {
+    background: var(--marron);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 80px 64px;
+    position: relative; overflow: hidden;
+  }
+
+  .cover-left::before {
+    content: '';
+    position: absolute; bottom: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--verde);
+    opacity: 0.35;
+  }
+
+  .cover-left::after {
+    content: '';
+    position: absolute; top: -40px; left: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: var(--ambar);
+    opacity: 0.1;
+  }
+
+  .cover-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--ambar);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 80px);
+    font-weight: 300;
+    color: var(--blanco);
+    line-height: 1.0;
+    margin-bottom: 12px;
+    position: relative; z-index: 1;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--ambar);
+  }
+
+  .cover-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    margin-top: 20px;
+    max-width: 320px;
+    position: relative; z-index: 1;
+  }
+
+  .cover-divider {
+    width: 48px; height: 1.5px;
+    background: var(--ambar);
+    margin: 28px 0;
+    position: relative; z-index: 1;
+  }
+
+  .cover-tags {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+
+  .tag {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 40px;
+    border: 1px solid rgba(200,135,58,0.4);
+    color: var(--ambar-lt);
+  }
+
+  .cover-right {
+    background: var(--crema);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 80px 64px;
+    gap: 20px;
+  }
+
+  .cover-card {
+    background: var(--blanco);
+    border: 1px solid var(--crema-osc);
+    border-radius: 16px;
+    padding: 28px 32px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex; align-items: center; gap: 24px;
+  }
+
+  .cover-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(44,24,16,0.08);
+    border-color: var(--ambar);
+  }
+
+  .cover-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--ambar);
+    line-height: 1;
+    min-width: 36px;
+  }
+
+  .cover-card-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--marron);
+    margin-bottom: 4px;
+  }
+
+  .cover-card-info p {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--texto-lt);
+    letter-spacing: 0.3px;
+  }
+
+  .cover-card-arrow {
+    margin-left: auto;
+    color: var(--ambar);
+    font-size: 18px;
+    transition: transform 0.3s;
+  }
+
+  .cover-card:hover .cover-card-arrow { transform: translateX(4px); }
+
+  /* ── LAYOUT INTERIOR ────────────────────────────────────── */
+  .page-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 48px 80px;
+  }
+
+  .page-header {
+    margin-bottom: 56px;
+  }
+
+  .page-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--ambar);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .page-eyebrow::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--ambar);
+    opacity: 0.35;
+    max-width: 160px;
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 54px);
+    font-weight: 300;
+    color: var(--marron);
+    line-height: 1.1;
+  }
+
+  .page-title em { font-style: italic; color: var(--ambar); }
+
+  .page-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--texto-lt);
+    line-height: 1.8;
+    max-width: 560px;
+    margin-top: 16px;
+  }
+
+  /* ── SECCIÓN INTERNA ────────────────────────────────────── */
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 3px;
+    color: var(--ambar);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--ambar);
+  }
+
+  /* ── TARJETAS ───────────────────────────────────────────── */
+  .card {
+    background: var(--blanco);
+    border: 1px solid var(--crema-osc);
+    border-radius: 16px;
+    padding: 32px;
+    transition: box-shadow 0.3s;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(44,24,16,0.07);
+  }
+
+  .card-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--crema);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--marron);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+
+  .card ul {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 9px;
+  }
+
+  .card ul li {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texto);
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .card ul li::before {
+    content: '';
+    position: absolute; left: 0; top: 7px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--ambar);
+  }
+
+  /* ── GRID LAYOUTS ───────────────────────────────────────── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+  /* ── STATS ──────────────────────────────────────────────── */
+  .stat-card {
+    background: var(--blanco);
+    border: 1px solid var(--crema-osc);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .stat-card:hover {
+    border-color: var(--ambar);
+    transform: translateY(-2px);
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--ambar);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--texto-lt);
+  }
+
+  /* ── HERO BANNER ────────────────────────────────────────── */
+  .hero-band {
+    background: var(--marron);
+    border-radius: 20px;
+    padding: 40px 48px;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 56px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-band::before {
+    content: '';
+    position: absolute; right: -60px; top: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: var(--verde);
+    opacity: 0.3;
+  }
+
+  .hero-band-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: var(--blanco);
+    margin-bottom: 8px;
+  }
+
+  .hero-band-text h2 em { color: var(--ambar); font-style: italic; }
+
+  .hero-band-text p {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+    max-width: 400px;
+  }
+
+  .hero-band-badges {
+    display: flex; flex-direction: column; gap: 10px;
+    min-width: 200px; position: relative; z-index: 1;
+  }
+
+  .hero-badge {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(200,135,58,0.3);
+    border-radius: 10px;
+    padding: 12px 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .hero-badge-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--ambar);
+    font-weight: 300;
+    min-width: 48px;
+  }
+
+  .hero-badge-txt {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  /* ── PASOS ──────────────────────────────────────────────── */
+  .steps {
+    display: flex; flex-direction: column; gap: 3px;
+  }
+
+  .step {
+    display: flex; align-items: flex-start; gap: 20px;
+    background: var(--blanco);
+    border: 1px solid var(--crema-osc);
+    border-radius: 14px;
+    padding: 22px 28px;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .step:hover {
+    border-color: var(--ambar);
+    transform: translateX(4px);
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--ambar);
+    line-height: 1;
+    min-width: 36px;
+  }
+
+  .step-body h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--marron);
+    margin-bottom: 4px;
+  }
+
+  .step-body p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texto-lt);
+    line-height: 1.6;
+  }
+
+  .step-icon {
+    margin-left: auto;
+    font-size: 20px;
+    opacity: 0.6;
+  }
+
+  /* ── TABLA TEMPERATURA ──────────────────────────────────── */
+  .temp-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 4px;
+  }
+
+  .temp-table thead tr th {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    background: var(--marron);
+    padding: 14px 20px;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .temp-table thead tr th:first-child { border-radius: 10px 0 0 10px; }
+  .temp-table thead tr th:last-child  { border-radius: 0 10px 10px 0; }
+
+  .temp-table tbody tr td {
+    background: var(--blanco);
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texto);
+    border-top: 1px solid var(--crema-osc);
+    border-bottom: 1px solid var(--crema-osc);
+  }
+
+  .temp-table tbody tr td:first-child {
+    border-left: 1px solid var(--crema-osc);
+    border-radius: 10px 0 0 10px;
+  }
+
+  .temp-table tbody tr td:last-child {
+    border-right: 1px solid var(--crema-osc);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .temp-badge {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 40px;
+    font-weight: 500;
+  }
+
+  .badge-perfect { background: var(--verde);  color: #fff; }
+  .badge-watch   { background: var(--ambar);  color: #fff; }
+  .badge-avoid   { background: var(--marron); color: var(--ambar); }
+  .badge-pause   { background: var(--menta);  color: var(--marron); }
+
+  /* ── BLOQUE SÍ/NO ───────────────────────────────────────── */
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .do-card {
+    border-radius: 16px;
+    padding: 32px;
+  }
+
+  .do-card.si {
+    background: var(--verde);
+    color: var(--blanco);
+  }
+
+  .do-card.no {
+    background: var(--marron);
+    color: var(--blanco);
+  }
+
+  .do-card h4 {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+
+  .do-card.si h4 { color: var(--menta); }
+  .do-card.no h4 { color: var(--ambar); }
+
+  .do-card ul {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 11px;
+  }
+
+  .do-card ul li {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.5;
+    opacity: 0.9;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .do-card.si ul li::before { content: '+'; position: absolute; left: 0; color: var(--menta); font-weight: 500; }
+  .do-card.no ul li::before { content: '—'; position: absolute; left: 0; color: var(--ambar); font-weight: 300; }
+
+  /* ── TIP BOX ────────────────────────────────────────────── */
+  .tip-box {
+    background: var(--blanco);
+    border: 1px solid var(--ambar);
+    border-left: 4px solid var(--ambar);
+    border-radius: 12px;
+    padding: 22px 28px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+
+  .tip-icon {
+    font-size: 18px;
+    min-width: 24px;
+    margin-top: 1px;
+  }
+
+  .tip-box p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texto);
+    line-height: 1.75;
+  }
+
+  .tip-box strong { color: var(--ambar); font-weight: 500; }
+
+  /* ── CONSUMO SEMANAS ────────────────────────────────────── */
+  .week-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+  .week-card {
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+
+  .week-card:hover { transform: translateY(-4px); }
+
+  .week-card.w1 { background: var(--menta); }
+  .week-card.w2 { background: var(--verde); }
+  .week-card.w3 { background: var(--marron); }
+
+  .week-card .wk-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+
+  .week-card.w1 .wk-label { color: var(--marron); }
+  .week-card.w2 .wk-label, .week-card.w3 .wk-label { color: rgba(255,255,255,0.6); }
+
+  .week-card .wk-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .week-card.w1 .wk-val { color: var(--marron); }
+  .week-card.w2 .wk-val { color: var(--blanco); }
+  .week-card.w3 .wk-val { color: var(--ambar); }
+
+  .week-card .wk-sub {
+    font-size: 11px;
+    font-weight: 300;
+    opacity: 0.65;
+  }
+
+  .week-card.w1 .wk-sub { color: var(--marron); }
+  .week-card.w2 .wk-sub, .week-card.w3 .wk-sub { color: rgba(255,255,255,0.7); }
+
+  /* ── BENEFICIOS ─────────────────────────────────────────── */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .benefit-item {
+    background: var(--blanco);
+    border: 1px solid var(--crema-osc);
+    border-radius: 14px;
+    padding: 22px 20px;
+    transition: all 0.3s;
+  }
+
+  .benefit-item:hover {
+    border-color: var(--menta);
+    transform: translateY(-2px);
+  }
+
+  .benefit-emoji {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .benefit-item h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--marron);
+    margin-bottom: 6px;
+  }
+
+  .benefit-item p {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--texto-lt);
+    line-height: 1.6;
+  }
+
+  /* ── MICROORGANISMOS ────────────────────────────────────── */
+  .micro-pills {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+
+  .micro-pill {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    padding: 7px 16px;
+    border-radius: 40px;
+    background: var(--verde);
+    color: rgba(255,255,255,0.85);
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  /* ── ALERTAS ────────────────────────────────────────────── */
+  .alerts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .alert-item {
+    background: var(--blanco);
+    border: 1px solid var(--crema-osc);
+    border-radius: 12px;
+    padding: 18px 22px;
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+
+  .alert-item.danger { border-left: 3px solid #C0392B; }
+  .alert-item.ok     { border-left: 3px solid var(--verde); }
+
+  .alert-item .a-icon { font-size: 18px; min-width: 20px; }
+
+  .alert-item p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texto);
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER MARCA ───────────────────────────────────────── */
+  .page-footer {
+    background: var(--crema-osc);
+    border-top: 1px solid rgba(200,135,58,0.2);
+    padding: 20px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--marron);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .footer-copy {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--texto-lt);
+  }
+
+  /* ── SEPARADOR DECORATIVO ───────────────────────────────── */
+  .deco-sep {
+    display: flex; align-items: center; gap: 12px;
+    margin: 40px 0 32px;
+  }
+
+  .deco-sep span {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ambar);
+    white-space: nowrap;
+  }
+
+  .deco-sep::before, .deco-sep::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--ambar); opacity: 0.25;
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 2px; }
+    .nav-btn { padding: 6px 10px; font-size: 9px; }
+    .cover { grid-template-columns: 1fr; }
+    .cover-right { padding: 40px 24px; }
+    .cover-left { padding: 60px 24px; min-height: 60vh; }
+    .page-inner { padding: 40px 20px 60px; }
+    .grid-2, .grid-3, .grid-4, .do-dont, .week-cards, .benefits-grid, .alerts-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-band { flex-direction: column; padding: 32px; }
+    .hero-band-badges { min-width: unset; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    DALEVA
+    <span>FERMENTACIÓN ARTESANAL</span>
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showPage('portada', this)">Inicio</button>
+    <button class="nav-btn" onclick="showPage('cuidado', this)">Búlgaros</button>
+    <button class="nav-btn" onclick="showPage('kefir', this)">Kéfir</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════ PORTADA ══ -->
+<div id="portada" class="page active">
+  <div class="cover">
+    <div class="cover-left">
+      <div class="cover-eyebrow">Guía Completa · Manual de Uso</div>
+      <div class="cover-title">El Arte del<br><em>Kéfir</em></div>
+      <div class="cover-divider"></div>
+      <p class="cover-subtitle">Aprende a cuidar tus búlgaros y preparar kéfir casero con amor, ciencia y fermentación viva.</p>
+      <div class="cover-tags">
+        <span class="tag">Natural · Vivo</span>
+        <span class="tag">Artesanal</span>
+        <span class="tag">Probiótico</span>
+      </div>
+    </div>
+    <div class="cover-right">
+      <p style="font-family:'Jost',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--ambar);margin-bottom:8px;">Explorar guía</p>
+      <div class="cover-card" onclick="showPage('cuidado', document.querySelectorAll('.nav-btn')[1])">
+        <div class="cover-card-num">01</div>
+        <div class="cover-card-info">
+          <h3>Cuidado de Búlgaros</h3>
+          <p>Qué son · Alimentación · Lavado · Utensilios · Beneficios</p>
+        </div>
+        <div class="cover-card-arrow">→</div>
+      </div>
+      <div class="cover-card" onclick="showPage('kefir', document.querySelectorAll('.nav-btn')[2])">
+        <div class="cover-card-num">02</div>
+        <div class="cover-card-info">
+          <h3>Preparación del Kéfir</h3>
+          <p>Paso a paso · Fermentación · Temperatura Panamá · Consumo</p>
+        </div>
+        <div class="cover-card-arrow">→</div>
+      </div>
+      <div style="margin-top:8px;padding:20px 0;border-top:1px solid var(--crema-osc);width:100%;">
+        <p style="font-size:12px;font-weight:300;color:var(--texto-lt);line-height:1.8;">
+          Los búlgaros son seres <em style="color:var(--ambar);">vivos</em>. Con el cuidado correcto,<br>crecen contigo para siempre.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Daleva</span>
+    <span class="footer-copy">Natural · Vivo · Artesanal</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ CUIDADO ══ -->
+<div id="cuidado" class="page">
+  <div class="page-inner">
+
+    <!-- Header -->
+    <div class="page-header">
+      <div class="page-eyebrow">01 · Búlgaros de Leche</div>
+      <h1 class="page-title">Cuidado &amp; <em>Alimentación</em></h1>
+      <p class="page-desc">Todo lo que necesitas saber para mantener tus búlgaros sanos, activos y creciendo indefinidamente.</p>
+    </div>
+
+    <!-- ¿Qué son? -->
+    <div class="section">
+      <div class="section-label">Lo primero · ¿Qué son?</div>
+      <div class="hero-band">
+        <div class="hero-band-text">
+          <h2>Colonias <em>simbióticas</em> vivas</h2>
+          <p>Los búlgaros son comunidades de bacterias lácticas y levaduras unidas por kefiran — una matriz gelatinosa natural. Al fermentar leche, producen kéfir: una bebida probiótica viva, cremosa y llena de microorganismos que cuidan tu intestino.</p>
+          <div style="margin-top:20px;">
+            <div class="micro-pills">
+              <span class="micro-pill">Lacticaseibacillus kefiri</span>
+              <span class="micro-pill">Lactobacillus acidophilus</span>
+              <span class="micro-pill">Leuconostoc mesenteroides</span>
+              <span class="micro-pill">Saccharomyces cerevisiae</span>
+              <span class="micro-pill">Acetobacter spp.</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-band-badges">
+          <div class="hero-badge">
+            <div class="hero-badge-val">24h</div>
+            <div class="hero-badge-txt">Frecuencia de<br>alimentación</div>
+          </div>
+          <div class="hero-badge">
+            <div class="hero-badge-val">1:20</div>
+            <div class="hero-badge-txt">Proporción búlgaros<br>por leche</div>
+          </div>
+          <div class="hero-badge">
+            <div class="hero-badge-val">∞</div>
+            <div class="hero-badge-txt">Viven y crecen<br>para siempre</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="section">
+      <div class="section-label">Referencia rápida · Alimentación</div>
+      <div class="grid-4">
+        <div class="stat-card">
+          <div class="stat-value">24h</div>
+          <div class="stat-label">Cambiar leche</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">5g</div>
+          <div class="stat-label">Búlgaros mínimo</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">100ml</div>
+          <div class="stat-label">Leche con 5g</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">1–2×</div>
+          <div class="stat-label">Lavado por semana</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Higiene + Leche -->
+    <div class="section">
+      <div class="section-label">Cuidado diario · Frasco y leche</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-icon">🫙</div>
+          <h3>Higiene del frasco</h3>
+          <ul>
+            <li>Lavar con agua caliente y jabón común en cada cambio de leche (cada 24h)</li>
+            <li>Enjuagar muy bien para eliminar todo el jabón</li>
+            <li>Esterilizar con vinagre blanco diluido (1:3) una vez por semana</li>
+            <li>Secar completamente antes de usarlo</li>
+            <li>Tip: tener dos frascos y alternarlos es muy práctico</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-icon">🥛</div>
+          <h3>La leche ideal</h3>
+          <ul>
+            <li>Leche entera pasteurizada fresca — la mejor opción siempre</li>
+            <li>Evitar UHT de forma habitual (proteínas desnaturalizadas)</li>
+            <li>Sin antibióticos añadidos — matan los microorganismos</li>
+            <li>A temperatura ambiente al agregarla, nunca fría del refrigerador</li>
+            <li>Leche de cabra u oveja también funciona muy bien</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lavado búlgaros -->
+    <div class="section">
+      <div class="section-label">Lavado · Los búlgaros mismos</div>
+      <div class="tip-box" style="margin-bottom:16px;">
+        <div class="tip-icon">💧</div>
+        <p><strong>¿Cómo lavarlos?</strong> Enjuágalos suavemente con <strong>agua fría o a temperatura ambiente sin cloro</strong>. Puedes dejar reposar agua del grifo 10 minutos o usar agua filtrada. Nunca uses agua caliente ni jabón directamente sobre los granos. Lávalos <strong>cada 1–2 semanas</strong> o cuando notes exceso de residuos.</p>
+      </div>
+    </div>
+
+    <!-- Utensilios -->
+    <div class="section">
+      <div class="section-label">Utensilios · Siempre y nunca</div>
+      <div class="do-dont">
+        <div class="do-card si">
+          <h4>Usa siempre</h4>
+          <ul>
+            <li>Frascos de vidrio para fermentar</li>
+            <li>Colador de plástico o nylon para colar</li>
+            <li>Cuchara de madera o plástico para mezclar</li>
+            <li>Paño limpio o filtro de café para tapar</li>
+            <li>Agua sin cloro para enjuagar los granos</li>
+          </ul>
+        </div>
+        <div class="do-card no">
+          <h4>Nunca uses</h4>
+          <ul>
+            <li>Metal: aluminio, cobre ni acero inoxidable</li>
+            <li>Jabón antibacterial ni productos con cloro</li>
+            <li>Tapa hermética mientras fermenta</li>
+            <li>Agua caliente directa sobre los granos</li>
+            <li>Electrodomésticos de metal en contacto</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Beneficios -->
+    <div class="section">
+      <div class="section-label">Beneficios · Digestivos y más</div>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-emoji">🌿</div>
+          <h4>Microbiota intestinal</h4>
+          <p>Repuebla el intestino con bacterias benéficas que fortalecen la flora natural.</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-emoji">🧬</div>
+          <h4>Tolerancia a lactosa</h4>
+          <p>Las enzimas del kéfir ayudan a digerirla mejor incluso en intolerantes.</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-emoji">🛡️</div>
+          <h4>Sistema inmune</h4>
+          <p>El 70% del sistema inmune vive en el intestino. El kéfir lo fortalece directamente.</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-emoji">🧠</div>
+          <h4>Eje intestino-cerebro</h4>
+          <p>Mejora el ánimo, reduce ansiedad leve y favorece el sueño profundo con uso regular.</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-emoji">🔥</div>
+          <h4>Antiinflamatorio</h4>
+          <p>Efecto antiinflamatorio sostenido tras semanas de consumo constante.</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-emoji">💊</div>
+          <h4>Vitaminas y minerales</h4>
+          <p>Aporta B12, B2, vitamina K2 y magnesio de forma natural y biodisponible.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tip viajes -->
+    <div class="section">
+      <div class="tip-box">
+        <div class="tip-icon">✈️</div>
+        <p><strong>Si viajas:</strong> cubre los búlgaros con leche fresca y guárdalos en la nevera. Aguantan hasta 7 días. Al regresar, descarta esa leche, enjuaga los granos con agua sin cloro y reinicia el ciclo normalmente. Tardan 1–2 ciclos en volver a su ritmo ideal.</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Daleva</span>
+    <span class="footer-copy">Página 01 · Búlgaros de Leche</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ KÉFIR ══ -->
+<div id="kefir" class="page">
+  <div class="page-inner">
+
+    <div class="page-header">
+      <div class="page-eyebrow">02 · Fermentación Artesanal</div>
+      <h1 class="page-title">Preparación del <em>Kéfir</em></h1>
+      <p class="page-desc">Desde los primeros pasos hasta entender cómo el kéfir transforma tu bienestar. Una guía clara para empezar con confianza.</p>
+    </div>
+
+    <!-- Pasos -->
+    <div class="section">
+      <div class="section-label">Preparación · Paso a paso</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <h4>Prepara tu frasco de vidrio</h4>
+            <p>Lávalo con agua caliente. Enjuaga bien sin dejar rastros de jabón. Sécalo completamente antes de usarlo.</p>
+          </div>
+          <div class="step-icon">🫙</div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <h4>Agrega los búlgaros</h4>
+            <p>Coloca los granos dentro del frasco. Con 5g de búlgaros usa 100–150ml de leche. La proporción base es 1:20.</p>
+          </div>
+          <div class="step-icon">✨</div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <h4>Vierte la leche entera</h4>
+            <p>A temperatura ambiente — nunca fría directamente del refrigerador. Mezcla suavemente con cuchara de madera o plástico.</p>
+          </div>
+          <div class="step-icon">🥛</div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <h4>Cubre y deja fermentar</h4>
+            <p>Cubre con paño limpio o filtro de café sujeto con liga. Nunca tapa hermética: los búlgaros necesitan respirar. Deja entre 18 y 24 horas a temperatura ambiente, lejos del sol directo.</p>
+          </div>
+          <div class="step-icon">⏱️</div>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <div class="step-body">
+            <h4>Cuela y disfruta</h4>
+            <p>Usa un colador de plástico. El líquido colado es tu kéfir. Los granos que quedan regresan al frasco con leche fresca para el siguiente ciclo.</p>
+          </div>
+          <div class="step-icon">🌿</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Temperatura -->
+    <div class="section">
+      <div class="section-label">Temperatura · Panamá y clima cálido</div>
+      <table class="temp-table">
+        <thead>
+          <tr>
+            <th>Temperatura</th>
+            <th>Tiempo estimado</th>
+            <th>Resultado</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Menos de 18°C</td>
+            <td>48 horas o más</td>
+            <td>Kéfir suave, poco ácido</td>
+            <td><span class="temp-badge badge-pause">Refrigerador</span></td>
+          </tr>
+          <tr>
+            <td>18°C – 24°C</td>
+            <td>24 – 36 horas</td>
+            <td>Kéfir suave y cremoso</td>
+            <td><span class="temp-badge badge-perfect">Ideal</span></td>
+          </tr>
+          <tr>
+            <td>24°C – 28°C</td>
+            <td>18 – 24 horas</td>
+            <td>Equilibrado y cremoso</td>
+            <td><span class="temp-badge badge-perfect">Perfecto</span></td>
+          </tr>
+          <tr>
+            <td>28°C – 32°C</td>
+            <td>14 – 20 horas</td>
+            <td>Más ácido y rápido</td>
+            <td><span class="temp-badge badge-watch">Vigila · Panamá</span></td>
+          </tr>
+          <tr>
+            <td>Más de 32°C</td>
+            <td>Menos de 14 horas</td>
+            <td>Muy ácido, búlgaros en riesgo</td>
+            <td><span class="temp-badge badge-avoid">Evitar</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tip-box" style="margin-top:16px;">
+        <div class="tip-icon">🇵🇦</div>
+        <p>En Panamá el calor acelera la fermentación. A <strong>28–32°C</strong> revisa tu kéfir a las <strong>16–20 horas</strong>. En la noche, cuando baja la temperatura, puede tomar las 24h completas. Anota la hora cuando pones la leche para llevar control.</p>
+      </div>
+    </div>
+
+    <!-- Sabor y alertas -->
+    <div class="section">
+      <div class="section-label">Sabor · ¿A qué se parece?</div>
+      <div class="card" style="margin-bottom:16px;">
+        <h3>¿Qué sabor esperar?</h3>
+        <p style="font-size:13px;font-weight:300;color:var(--texto-lt);line-height:1.8;margin-top:4px;">El kéfir tiene un sabor <strong style="color:var(--ambar);">ácido suave, ligeramente efervescente y cremoso</strong>, similar al yogurt natural pero más líquido y con un toque más vivo. Es diferente a la leche agria tradicional: más complejo en sabor y con mayor cantidad de microorganismos. A medida que te acostumbras, se vuelve muy agradable y refrescante. El kéfir sobre-fermentado solo huele más ácido — aun así es seguro.</p>
+      </div>
+      <div class="section-label" style="margin-top:32px;">Alertas · ¿Cuándo está dañado?</div>
+      <div class="alerts-grid">
+        <div class="alert-item ok">
+          <div class="a-icon">✅</div>
+          <p><strong>Listo cuando:</strong> la leche espesó, huele ácido suave como yogurt, los granos flotan o se separan del suero.</p>
+        </div>
+        <div class="alert-item ok">
+          <div class="a-icon">✅</div>
+          <p><strong>Normal:</strong> separación de suero amarillo transparente, sabor más ácido al fermentar más tiempo.</p>
+        </div>
+        <div class="alert-item danger">
+          <div class="a-icon">🚫</div>
+          <p><strong>Descarta si ves:</strong> moho de cualquier color (negro, rosado, verde) sobre la superficie del kéfir.</p>
+        </div>
+        <div class="alert-item danger">
+          <div class="a-icon">🚫</div>
+          <p><strong>Descarta si:</strong> huele a rancio o acetona, o el líquido tiene color rosado, amarillo intenso o textura babosa anormal.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conservación -->
+    <div class="deco-sep"><span>Conservación y consumo</span></div>
+
+    <div class="grid-2" style="margin-bottom:40px;">
+      <div class="card">
+        <div class="card-icon">❄️</div>
+        <h3>¿Cuánto dura en la nevera?</h3>
+        <ul>
+          <li>5 a 7 días refrigerado en frasco de vidrio con tapa</li>
+          <li>Con el tiempo se vuelve más ácido, pero sigue siendo seguro</li>
+          <li>Para mayor frescura, consúmelo en los primeros 3–4 días</li>
+          <li>Nunca congeles el kéfir ya colado — pierde propiedades</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">🫗</div>
+        <h3>¿Cómo tomarlo?</h3>
+        <ul>
+          <li>Solo y frío, como bebida refrescante</li>
+          <li>Con miel de abeja o fruta para suavizar el ácido</li>
+          <li>En smoothies o batidos de frutas tropicales</li>
+          <li>Como base de aderezos tipo ranch natural</li>
+          <li>En recetas de pancakes, panes o marinados</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Consumo gradual -->
+    <div class="section">
+      <div class="section-label">Inicio · Cómo empezar a consumirlo</div>
+      <div class="week-cards">
+        <div class="week-card w1">
+          <div class="wk-label">Semana 1</div>
+          <div class="wk-val">80 ml</div>
+          <div class="wk-sub">por día · en ayunas</div>
+        </div>
+        <div class="week-card w2">
+          <div class="wk-label">Semana 2 – 3</div>
+          <div class="wk-val">150 ml</div>
+          <div class="wk-sub">por día · con desayuno</div>
+        </div>
+        <div class="week-card w3">
+          <div class="wk-label">Semana 4 en adelante</div>
+          <div class="wk-val">250 ml</div>
+          <div class="wk-sub">por día · sin restricción</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Eje intestino-cerebro -->
+    <div class="section">
+      <div class="section-label">Bienestar · Eje intestino-cerebro</div>
+      <div class="hero-band">
+        <div class="hero-band-text">
+          <h2>Lo que notarás con el <em>tiempo</em></h2>
+          <p>El intestino produce más del 90% de la serotonina del cuerpo. Al mejorar tu microbiota con kéfir, muchas personas reportan cambios notables en su bienestar general. Estos efectos suelen aparecer después de 3–6 semanas de consumo regular.</p>
+        </div>
+        <div class="hero-band-badges">
+          <div class="hero-badge"><div class="hero-badge-val">🧠</div><div class="hero-badge-txt">Mejor ánimo y menos irritabilidad</div></div>
+          <div class="hero-badge"><div class="hero-badge-val">😴</div><div class="hero-badge-txt">Sueño más profundo y reparador</div></div>
+          <div class="hero-badge"><div class="hero-badge-val">✨</div><div class="hero-badge-txt">Mayor claridad mental y energía</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips finales -->
+    <div class="section">
+      <div class="section-label">Tips finales · Para principiantes</div>
+      <div class="grid-2">
+        <div class="tip-box">
+          <div class="tip-icon">🏷️</div>
+          <p>Etiqueta tu frasco con <strong>fecha y hora</strong> al poner los búlgaros. En el clima de Panamá es clave para no sobre-fermentar.</p>
+        </div>
+        <div class="tip-box">
+          <div class="tip-icon">🌱</div>
+          <p>Los búlgaros sanos <strong>crecen cada semana</strong>. Cuando tengas de más, regala el excedente a una amiga y esparce el amor.</p>
+        </div>
+        <div class="tip-box">
+          <div class="tip-icon">💛</div>
+          <p>Si ves exceso de suero transparente, el kéfir <strong>fermentó de más</strong>. Reduce 2–4 horas el próximo ciclo.</p>
+        </div>
+        <div class="tip-box">
+          <div class="tip-icon">🔄</div>
+          <p>Los granos pequeños al inicio son <strong>completamente normales</strong>. Irán creciendo con cada ciclo de fermentación.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Daleva</span>
+    <span class="footer-copy">Página 02 · Kéfir Artesanal</span>
+  </div>
+</div>
+
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
